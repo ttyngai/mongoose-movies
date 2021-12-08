@@ -9,6 +9,10 @@ module.exports = {
 function index(req, res) {
   // find all movies
   Movie.find({}, function(err, movies) {
+    if (err) {
+      console.log(err);
+      return res.redirect('/');
+    }
     res.render('movies/index', { movies });
   });
 }
@@ -38,6 +42,6 @@ function create(req, res) {
     }
     // if there were no errors...
     console.log(movie);
-    res.redirect('/');
+    res.redirect('/movies');
   });
 }

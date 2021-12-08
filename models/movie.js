@@ -7,6 +7,8 @@ const movieSchema = new Schema({
   mpaaRating: String,
   cast: [String],
   nowShowing: Boolean,
+}, {
+  timestamps: true
 });
 
 // Compile the schema into a model, and export the model
