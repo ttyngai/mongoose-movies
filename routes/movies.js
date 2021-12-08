@@ -7,5 +7,8 @@ const moviesCtrl = require('../controllers/movies');
 // GET "/movies/new" - New Route
 router.get('/new', moviesCtrl.new);
 
+// POST "/movies" - Create Route
+router.post('/', moviesCtrl.create);
+
 
 module.exports = router;
