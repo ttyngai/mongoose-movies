@@ -10,6 +10,9 @@ var usersRouter = require('./routes/users');
 // This will load our env variables
 require('dotenv').config();
 
+// This will connect us to the database
+require('./config/database');
+
 var app = express();
 
 // view engine setup
