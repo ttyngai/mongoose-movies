@@ -36,7 +36,10 @@ function create(req, res) {
   var movie = new Movie(req.body);
   movie.save(function (err) {
     // one way to handle errors
-    if (err) return res.redirect("/movies/new");
+    if (err) {
+      console.log(err);
+      return res.redirect("/movies/new");
+    }
     console.log(movie);
     // for now, redirect right back to new.ejs
     res.redirect("/movies");

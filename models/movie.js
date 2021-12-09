@@ -1,6 +1,18 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
+const reviewSchema = new Schema({
+  content: String,
+  rating: {
+    type: Number,
+    min: 1,
+    max: 5,
+    default: 5
+  }
+}, {
+  timestamps: true
+});
+
 var movieSchema = new Schema({
     title: {
       type: String,
@@ -12,9 +24,13 @@ var movieSchema = new Schema({
         return new Date().getFullYear();
       },
     },
-    mpaaRating: String,
+    mpaaRating: {
+      type: String,
+      enum: ['G', 'PG', 'PG-13', 'R']
+    },
     cast: [String],
     nowShowing: { type: Boolean, default: false },
+    reviews: [reviewSchema]
   },
   {
     timestamps: true,
