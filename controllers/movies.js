@@ -1,47 +1,44 @@
-const Movie = require('../models/movie');
+var Movie = require("../models/movie");
 
 module.exports = {
+  index,
+  show,
   new: newMovie,
   create,
-  index
 };
 
 function index(req, res) {
-  // find all movies
-  Movie.find({}, function(err, movies) {
-    if (err) {
-      console.log(err);
-      return res.redirect('/');
-    }
-    res.render('movies/index', { movies });
+  Movie.find({}, function (err, movies) {
+    res.render("movies/index", { title: "All Movies", movies });
+  });
+}
+
+function show(req, res) {
+  Movie.findById(req.params.id, function (err, movie) {
+    res.render("movies/show", { title: "Movie Detail", movie });
   });
 }
 
 function newMovie(req, res) {
-  res.render('movies/new');
+  res.render("movies/new", { title: "Add Movie" });
 }
 
 function create(req, res) {
-  // extract boolean value from the checkbox
+  // convert nowShowing's checkbox of nothing or "on" to boolean
   req.body.nowShowing = !!req.body.nowShowing;
-  // remove any whitespace the user may have added
-  req.body.cast = req.body.cast.trim();
-  // if the cast is not empty...
-  if (req.body.cast) {
-    // turn that string into an array of strings
-    req.body.cast = req.body.cast.split(/\s*,\s*/);
-  };
-  // create an in-memory Movie obj (not saved in DB yet)
-  const movie = new Movie(req.body);
-  // save the obj in our DB
-  movie.save(function(err) {
-    // handle any errors
-    if (err) {
-      console.log(err);
-      return res.redirect('/movies/new');
-    }
-    // if there were no errors...
+  // remove whitespace next to commas
+  req.body.cast = req.body.cast.replace(/\s*,\s*/g, ",");
+  // split if it's not an empty string
+  if (req.body.cast) req.body.cast = req.body.cast.split(",");
+  for (let key in req.body) {
+    if (req.body[key] === "") delete req.body[key];
+  }
+  var movie = new Movie(req.body);
+  movie.save(function (err) {
+    // one way to handle errors
+    if (err) return res.redirect("/movies/new");
     console.log(movie);
-    res.redirect('/movies');
+    // for now, redirect right back to new.ejs
+    res.redirect("/movies");
   });
 }

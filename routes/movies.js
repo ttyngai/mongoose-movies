@@ -14,4 +14,7 @@ router.post('/', moviesCtrl.create);
 router.get('/', moviesCtrl.index);
 
 
+// GET "/movies/:id" - Show Route
+router.get("/:id", moviesCtrl.show);
+
 module.exports = router;

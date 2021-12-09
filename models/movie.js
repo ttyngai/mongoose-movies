@@ -1,15 +1,24 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 
-const movieSchema = new Schema({
-  title: String,
-  releaseYear: Number,
-  mpaaRating: String,
-  cast: [String],
-  nowShowing: Boolean,
-}, {
-  timestamps: true
-});
+var movieSchema = new Schema({
+    title: {
+      type: String,
+      required: true,
+    },
+    releaseYear: {
+      type: Number,
+      default: function () {
+        return new Date().getFullYear();
+      },
+    },
+    mpaaRating: String,
+    cast: [String],
+    nowShowing: { type: Boolean, default: false },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-// Compile the schema into a model, and export the model
-module.exports = mongoose.model('Movie', movieSchema);
+module.exports = mongoose.model("Movie", movieSchema);
