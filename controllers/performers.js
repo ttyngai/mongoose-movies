@@ -8,11 +8,16 @@ module.exports = {
 };
 
 function addToCast(req, res) {
-  console.log(req.body.performerId);
   // first find the movie we are trying to add a cast member to
-  // Movie.findById(req.params.movieId, function(err, movie) {
-    
-  // });
+  Movie.findById(req.params.movieId, function(err, movie) {
+    // then, add the performers ID to the cast array
+    movie.cast.push(req.body.performerId);
+    // lastly, save the parent document
+    movie.save(function(err) {
+      if (err) console.log(err);
+      res.redirect(`/movies/${movie._id}`);
+    })
+  });
 }
 
 function create(req, res) {
