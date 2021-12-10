@@ -1,4 +1,4 @@
-var Movie = require("../models/movie");
+const Movie = require("../models/movie");
 
 module.exports = {
   index,
@@ -26,14 +26,11 @@ function newMovie(req, res) {
 function create(req, res) {
   // convert nowShowing's checkbox of nothing or "on" to boolean
   req.body.nowShowing = !!req.body.nowShowing;
-  // remove whitespace next to commas
-  req.body.cast = req.body.cast.replace(/\s*,\s*/g, ",");
-  // split if it's not an empty string
-  if (req.body.cast) req.body.cast = req.body.cast.split(",");
+  // delete any empty properties from req.body
   for (let key in req.body) {
     if (req.body[key] === "") delete req.body[key];
   }
-  var movie = new Movie(req.body);
+  const movie = new Movie(req.body);
   movie.save(function (err) {
     // one way to handle errors
     if (err) {
@@ -41,7 +38,6 @@ function create(req, res) {
       return res.redirect("/movies/new");
     }
     console.log(movie);
-    // for now, redirect right back to new.ejs
     res.redirect("/movies");
   });
 }

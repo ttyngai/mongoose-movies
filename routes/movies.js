@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const moviesCtrl = require('../controllers/movies');
 
 // All paths in this router have "/movies" prefixed to them

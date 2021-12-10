@@ -1,5 +1,5 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
   content: String,
@@ -13,7 +13,7 @@ const reviewSchema = new Schema({
   timestamps: true
 });
 
-var movieSchema = new Schema({
+const movieSchema = new Schema({
     title: {
       type: String,
       required: true,
