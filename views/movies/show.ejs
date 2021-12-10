@@ -17,6 +17,7 @@
   <!-- end cast list -->
 </section>
 <!-- add to cast form below this comment -->
+<br>
 <form id="add-per-to-cast" action="/movies/<%= movie._id %>/performers" method="POST">
   <select name="performerId">
     <% performers.forEach(function(p) { %>

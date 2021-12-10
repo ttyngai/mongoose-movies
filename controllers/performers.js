@@ -3,8 +3,17 @@ const Movie = require('../models/movie');
 
 module.exports = {
   new: newPerformer,
-  create
+  create,
+  addToCast
 };
+
+function addToCast(req, res) {
+  console.log(req.body.performerId);
+  // first find the movie we are trying to add a cast member to
+  // Movie.findById(req.params.movieId, function(err, movie) {
+    
+  // });
+}
 
 function create(req, res) {
   // Need to "fix" date formatting to prevent day off by 1
