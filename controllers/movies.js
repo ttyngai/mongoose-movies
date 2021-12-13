@@ -8,10 +8,27 @@ module.exports = {
   create,
 };
 
-function index(req, res) {
-  Movie.find({}, function (err, movies) {
-    res.render("movies/index", { title: "All Movies", movies });
-  });
+// // callback function
+// function index(req, res) {
+//   Movie.find({}, function (err, movies) {
+//     res.render("movies/index", { title: "All Movies", movies });
+//   });
+// }
+
+// // promises with .then function
+// function index(req, res) {
+//   Movie.find({})
+//   .then(function(movies) {
+//     res.render("movies/index", { title: "All Movies", movies });
+//   }).catch(function(err) {
+//     console.log(err);
+//   });
+// }
+
+// promises with async/await function
+async function index(req, res) {
+  const movies = await Movie.find({});
+  res.render("movies/index", { title: "All Movies", movies });
 }
 
 function show(req, res) {
