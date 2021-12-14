@@ -26,3 +26,13 @@ passport.use(
     })
   })
 );
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user._id);
+});
+
+passport.deserializeUser(function(userId) {
+  User.findById(userId).then(function(user) {
+    cb(null, user);
+  })
+});
