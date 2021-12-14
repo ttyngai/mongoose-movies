@@ -13,6 +13,7 @@ Promise.resolve().then(function() {
 }).then(function(result) {
   console.log('1): ', result)
   // 2) Find all performer docs
+  
 
 }).then(function(result) {
   console.log('2): ', result)
