@@ -17,6 +17,9 @@ require('dotenv').config();
 // This will connect us to the database
 require('./config/database');
 
+// require the passport module
+require('./config/passport');
+
 const app = express();
 
 // view engine setup
